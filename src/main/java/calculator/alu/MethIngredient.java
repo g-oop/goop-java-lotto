@@ -10,15 +10,22 @@ public class MethIngredient {
     private final IngredientType type;
 
     public MethIngredient(String ingredient) {
+        validationBlank(ingredient);
         this.type = determinationIngredient(ingredient);
         this.ingredient = ingredient;
     }
 
+    private void validationBlank(String ingredient) {
+        if (ingredient.isBlank()) {
+            throw new IllegalArgumentException("유효하지 않은 인자 : blank");
+        }
+    }
+
     private IngredientType determinationIngredient(String ingredient) {
-        if(validOperand(ingredient)) {
+        if (validOperand(ingredient)) {
             return IngredientType.OPERAND;
         }
-        if(validOperator(ingredient)) {
+        if (validOperator(ingredient)) {
             return IngredientType.OPERATOR;
         }
         throw new IllegalArgumentException("유효하지 않은 인자 : " + ingredient);

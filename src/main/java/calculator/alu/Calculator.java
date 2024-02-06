@@ -15,20 +15,25 @@ public class Calculator {
     }
 
     private void progressCalculate(MethIngredient methIngredient) {
-        String ingredient = methIngredient.getIngredient();
         if (methIngredient.isOperand() && !mustOperator) {
-             calculateOneOperand(Integer.parseInt(ingredient));
-             mustOperator = true;
-             return;
-        }
-
-        if (methIngredient.isOperator() && mustOperator) {
-            currentOperator = ingredient;
-            mustOperator = false;
+            progressOperand(methIngredient);
             return;
         }
+        if (methIngredient.isOperator() && mustOperator) {
+            progressOperator(methIngredient);
+            return;
+        }
+        throw new IllegalArgumentException("유효하지 않은 인자 : " + methIngredient.getIngredient());
+    }
 
-        throw new IllegalArgumentException("유효하지 않은 인자 : " + ingredient);
+    private void progressOperand(MethIngredient methIngredient) {
+        calculateOneOperand(Integer.parseInt(methIngredient.getIngredient()));
+        mustOperator = true;
+    }
+
+    private void progressOperator(MethIngredient methIngredient) {
+        currentOperator = methIngredient.getIngredient();
+        mustOperator = false;
     }
 
     private void calculateOneOperand(Integer subOperand) {
