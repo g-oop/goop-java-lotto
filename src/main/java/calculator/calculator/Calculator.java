@@ -1,25 +1,33 @@
-package calculator.alu;
+package calculator.calculator;
 
 import java.util.List;
+
+import calculator.calculator.dto.ProgressStatus;
 
 public class Calculator {
 
     public Integer calculate(List<MathIngredient> mathIngredients) {
-        return progressCalculate(mathIngredients.get(0).getOperand(), mathIngredients, 0);
+        return progressCalculate(ProgressStatus.startCalculate(mathIngredients));
     }
 
-    private Integer progressCalculate(int lastOperand, List<MathIngredient> mathIngredients, int index) {
-        if(index == 0) {
-            return progressCalculate(lastOperand, mathIngredients, index + 2);
+    private Integer progressCalculate(ProgressStatus status) {
+        if(status.isStart()) {
+            return progressCalculate(status.nextCalculate());
         }
-        if(mathIngredients.size() - 1 > index) {
-            lastOperand = doCalculate(lastOperand, mathIngredients.get(index).getOperand(), mathIngredients.get(index -1).getOperator());
-            return progressCalculate(lastOperand, mathIngredients, index + 2);
+
+        if(status.isProgress()) {
+            int lastOperand = doCalculate(status);
+            return progressCalculate(status.nextCalculate(lastOperand));
         }
-        return doCalculate(lastOperand, mathIngredients.get(index).getOperand(), mathIngredients.get(index - 1).getOperator());
+
+        return doCalculate(status);
     }
 
-    private int doCalculate(Integer lastOperand, Integer subOperand, OperatorType operator) {
+    private int doCalculate(ProgressStatus status) {
+        int lastOperand = status.getLastOperand();
+        int subOperand = status.getSubOperand();
+        OperatorType operator = status.getOperator();
+
         if (operator.isAdd()) {
             return lastOperand + subOperand;
         }

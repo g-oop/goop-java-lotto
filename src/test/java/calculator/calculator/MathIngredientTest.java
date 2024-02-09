@@ -1,4 +1,4 @@
-package calculator.alu;
+package calculator.calculator;
 
 import java.util.List;
 import java.util.stream.Stream;

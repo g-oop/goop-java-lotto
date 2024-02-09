@@ -1,4 +1,4 @@
-package calculator.alu;
+package calculator.calculator;
 
 
 public class MathIngredient {

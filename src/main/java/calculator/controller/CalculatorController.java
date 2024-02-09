@@ -2,8 +2,8 @@ package calculator.controller;
 
 import java.util.List;
 
-import calculator.alu.Calculator;
-import calculator.alu.MathIngredient;
+import calculator.calculator.Calculator;
+import calculator.calculator.MathIngredient;
 import calculator.view.InputView;
 import calculator.view.ResultView;
 

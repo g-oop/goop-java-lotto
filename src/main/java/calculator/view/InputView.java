@@ -2,7 +2,7 @@ package calculator.view;
 
 import java.util.*;
 
-import calculator.alu.MathIngredient;
+import calculator.calculator.MathIngredient;
 
 public class InputView {
 
