@@ -4,53 +4,44 @@ import java.util.List;
 
 public class Calculator {
 
-    private static final Alu ALU = new Alu();
-    private int mainOperand = 0;
-    private String currentOperator = "+";
-    private boolean mustOperator = false;
-
-    public Integer calculate(List<MethIngredient> methIngredients) {
-        methIngredients.forEach(this::progressCalculate);
-        return mainOperand;
+    public Integer calculate(List<MathIngredient> mathIngredients) {
+        return progressCalculate(mathIngredients.get(0).getOperand(), mathIngredients, 0);
     }
 
-    private void progressCalculate(MethIngredient methIngredient) {
-        if (methIngredient.isOperand() && !mustOperator) {
-            progressOperand(methIngredient);
-            return;
+    private Integer progressCalculate(int lastOperand, List<MathIngredient> mathIngredients, int index) {
+        if(index == 0) {
+            return progressCalculate(lastOperand, mathIngredients, index + 2);
         }
-        if (methIngredient.isOperator() && mustOperator) {
-            progressOperator(methIngredient);
-            return;
+        if(mathIngredients.size() - 1 > index) {
+            lastOperand = doCalculate(lastOperand, mathIngredients.get(index).getOperand(), mathIngredients.get(index -1).getOperator());
+            return progressCalculate(lastOperand, mathIngredients, index + 2);
         }
-        throw new IllegalArgumentException("유효하지 않은 인자 : " + methIngredient.getIngredient());
+        return doCalculate(lastOperand, mathIngredients.get(index).getOperand(), mathIngredients.get(index - 1).getOperator());
     }
 
-    private void progressOperand(MethIngredient methIngredient) {
-        calculateOneOperand(Integer.parseInt(methIngredient.getIngredient()));
-        mustOperator = true;
+    private int doCalculate(Integer lastOperand, Integer subOperand, OperatorType operator) {
+        if (operator.isAdd()) {
+            return lastOperand + subOperand;
+        }
+
+        if (operator.isSub()) {
+            return lastOperand - subOperand;
+        }
+
+        if (operator.isMultiple()) {
+            return lastOperand * subOperand;
+        }
+
+        if (operator.isDivision()) {
+            validateDivision(lastOperand, subOperand);
+            return lastOperand / subOperand;
+        }
+        throw new IllegalArgumentException("유효하지 않은 인자 : " + operator.getCode());
     }
 
-    private void progressOperator(MethIngredient methIngredient) {
-        currentOperator = methIngredient.getIngredient();
-        mustOperator = false;
-    }
-
-    private void calculateOneOperand(Integer subOperand) {
-        if ("+".equals(currentOperator)) {
-            mainOperand = ALU.add(mainOperand, subOperand, currentOperator);
-        }
-
-        if ("-".equals(currentOperator)) {
-            mainOperand = ALU.sub(mainOperand, subOperand, currentOperator);
-        }
-
-        if ("*".equals(currentOperator)) {
-            mainOperand = ALU.multiple(mainOperand, subOperand, currentOperator);
-        }
-
-        if ("/".equals(currentOperator)) {
-            mainOperand = ALU.division(mainOperand, subOperand, currentOperator);
+    private void validateDivision(int mainOperand, int subOperand) {
+        if (mainOperand % subOperand != 0) {
+            throw new IllegalArgumentException("나눗셈 나머지 존재: " + mainOperand + "/" + subOperand);
         }
     }
 

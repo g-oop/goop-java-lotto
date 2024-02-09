@@ -4,10 +4,10 @@ public enum IngredientType {
     OPERAND, OPERATOR;
 
     public boolean isOperand() {
-        return OPERAND.equals(this);
+        return this == OPERAND;
     }
 
     public boolean isOperator() {
-        return OPERATOR.equals(this);
+        return this == OPERATOR;
     }
 }

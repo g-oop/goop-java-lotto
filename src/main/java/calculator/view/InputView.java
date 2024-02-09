@@ -2,15 +2,15 @@ package calculator.view;
 
 import java.util.*;
 
-import calculator.alu.MethIngredient;
+import calculator.alu.MathIngredient;
 
 public class InputView {
 
     private static final Scanner SCANNER = new Scanner(System.in);
 
-    public static List<MethIngredient> inputStringEquation() {
+    public static List<MathIngredient> inputStringEquation() {
         display();
-        return splitMethIngredients(userStringInput());
+        return splitMathIngredients(userStringInput());
     }
 
     private static void display() {
@@ -25,10 +25,10 @@ public class InputView {
         return SCANNER.nextLine();
     }
 
-    private static List<MethIngredient> splitMethIngredients(String text) {
+    private static List<MathIngredient> splitMathIngredients(String text) {
         return Arrays
             .stream(text.split(" "))
-            .map(MethIngredient::new)
+            .map(MathIngredient::new)
             .toList();
     }
 }
