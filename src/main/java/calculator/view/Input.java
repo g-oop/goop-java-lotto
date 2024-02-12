@@ -1,12 +1,18 @@
 package calculator.view;
 
 
+import java.util.Scanner;
+
 public class Input {
 
 
-    public static String[] getInput(String inputString) throws IllegalArgumentException {
+    private static final Scanner STRING_INPUT = new Scanner(System.in);
+
+    public static String getInput() throws IllegalArgumentException {
+        System.out.println("문자열 입력 : ");
+        String inputString = STRING_INPUT.nextLine();
         validate(inputString);
-        return inputString.split(" ");
+        return inputString;
     }
 
     private static void validate(String inputString) {
