@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 import static calculator.service.CalculatorProcessService.processCalculator;
 import static calculator.view.Input.getInput;
-import static calculator.view.output.printResult;
+import static calculator.view.Output.printResult;
 
 public class CalculatorApplication {
 

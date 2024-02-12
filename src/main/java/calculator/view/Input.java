@@ -10,7 +10,7 @@ public class Input {
     }
 
     private static void validate(String inputString) {
-        if(inputString == null || inputString.isEmpty()){
+        if(inputString == null || inputString.isBlank()){
             throw new IllegalArgumentException("입력 값이 Null이거나 빈 공백 문자입니다.");
         }
     }
