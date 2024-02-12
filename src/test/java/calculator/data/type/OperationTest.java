@@ -12,45 +12,34 @@ public class OperationTest {
     @Test
     @DisplayName("덧셈 테스트")
     public void addTest(){
-        int num1 = 3;
-        int num2 = 5;
-        int expectedValue = 8;
         Operation addition = Operation.ADDITION;
-        int result = addition.apply(num1, num2);
-        Assertions.assertThat(result).isEqualTo(expectedValue);
+        int result = addition.apply(3, 5);
+        Assertions.assertThat(result).isEqualTo(8);
     }
 
     @Test
     @DisplayName("뺄셈 테스트")
     public void subtractTest(){
-        int num1 = 8;
-        int num2 = 5;
-        int expectedValue = 3;
         Operation subtraction  = Operation.SUBTRACTION;
-        int result = subtraction.apply(num1, num2);
-        Assertions.assertThat(result).isEqualTo(expectedValue);
+        int result = subtraction.apply(8, 5);
+        Assertions.assertThat(result).isEqualTo(3);
     }
 
     @Test
     @DisplayName("곱하기 테스트")
     public void multiplyTest(){
-        int num1 = 2;
-        int num2 = 5;
-        int expectedValue = 10;
+
         Operation multiplication  = Operation.MULTIPLICATION;
-        int result = multiplication.apply(num1, num2);
-        Assertions.assertThat(result).isEqualTo(expectedValue);
+        int result = multiplication.apply(2, 5);
+        Assertions.assertThat(result).isEqualTo(10);
     }
 
     @Test
     @DisplayName("나누기 테스트")
     public void divideTest(){
-        int num1 = 10;
-        int num2 = 5;
-        int expectedValue = 2;
         Operation division  = Operation.DIVISION;
-        int result = division.apply(num1, num2);
-        Assertions.assertThat(result).isEqualTo(expectedValue);
+        int result = division.apply(10,5);
+        Assertions.assertThat(result).isEqualTo(2);
     }
 
     @Test
