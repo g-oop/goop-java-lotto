@@ -43,7 +43,7 @@ public class OperationTest {
     }
 
     @Test
-    @DisplayName("0으로 나눌떄 예외 처리")
+    @DisplayName("0이거나 정수로 떨어지지않을때 예외를 던진다.")
     public void divideByZeroHandler(){
         Operation division  = Operation.DIVISION;
         assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(()->division.apply(5,0)).withMessageMatching("0으로 나눌 수 없습니다.");
@@ -62,7 +62,7 @@ public class OperationTest {
     }
 
     @Test
-    @DisplayName("사칙연산 기호가 아닌 경우")
+    @DisplayName("사칙연산 기호가 아닌 경우 예외를 던진다.")
     public void isNotArithmeticOperator(){
         String operation = "!";
         assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> Operation.identifyOperations(operation)).withMessageMatching("사칙연산 기호가 아닙니다.!");
