@@ -43,6 +43,14 @@ public class OperationTest {
     }
 
     @Test
+    @DisplayName("0으로 나눌떄 예외 처리")
+    public void divideByZeroHandler(){
+        Operation division  = Operation.DIVISION;
+        assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(()->division.apply(5,0)).withMessageMatching("0으로 나눌 수 없습니다.");
+        assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(()->division.apply(5,7)).withMessageMatching("나눗셈 결과가 정수로 떨어지지 않습니다.");
+    }
+
+    @Test
     @DisplayName("입력 값이 null이거나 빈 공백 문자일 경우")
     public void InputValidationForNullAndEmptyValues(){
         var blankString = "";
