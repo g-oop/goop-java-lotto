@@ -6,7 +6,7 @@ public class Input {
 
     public static String[] getInput(String inputString) throws IllegalArgumentException {
         validate(inputString);
-        return input.split(" ");
+        return inputString.split(" ");
     }
 
     private static void validate(String inputString) {

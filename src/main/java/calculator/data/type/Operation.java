@@ -42,12 +42,14 @@ public enum Operation {
         this.operator = operator;
     }
 
-    public abstract int apply(int num1, int num2);
-
     public static Operation identifyOperations(String inputOperator) {
         return Arrays.stream(Operation.values())
-            .filter(operation -> operation.operator.equals(inputOperator))
-            .findFirst()
-            .orElseThrow(() -> new IllegalArgumentException("사칙연산 기호가 아닙니다." + inputOperator));
+                .filter(operation -> operation.operator.equals(inputOperator))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("사칙연산 기호가 아닙니다." + inputOperator));
     }
+
+    public abstract int apply(int num1, int num2);
+
+
 }

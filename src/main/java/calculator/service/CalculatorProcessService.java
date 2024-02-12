@@ -4,7 +4,6 @@ import calculator.data.type.Operation;
 
 public class CalculatorProcessService {
 
-
     public static int processCalculator(String[] inputs) {
         int result = Integer.parseInt(inputs[0]);
         for (int i = 1; i < inputs.length; i += 2) {
