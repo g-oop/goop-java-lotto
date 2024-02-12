@@ -51,7 +51,7 @@ public class OperationTest {
     }
 
     @Test
-    @DisplayName("입력 값이 null이거나 빈 공백 문자일 경우")
+    @DisplayName("입력 값이 null이거나 빈 공백 문자일 경우 예외를 던진다.")
     public void InputValidationForNullAndEmptyValues(){
         var blankString = "";
 
