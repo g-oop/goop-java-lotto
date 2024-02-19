@@ -52,5 +52,12 @@ public class OperationTest {
         assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(()->division.apply(5,7)).withMessageMatching("나눗셈 결과가 정수로 떨어지지 않습니다.");
     }
 
+    @Test
+    @DisplayName("사칙연산 기호가 아닌 경우 예외를 던진다.")
+    public void isNotArithmeticOperator(){
+        String operation = "!";
+        assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> Operation.identifyOperations(operation)).withMessageMatching("사칙연산 기호가 아닙니다.!");
+    }
+
 
 }
